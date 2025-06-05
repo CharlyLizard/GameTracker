@@ -1,0 +1,27 @@
+{
+  "name": "client",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.2.3",
+    "@astrojs/tailwind": "^6.0.2",
+    "@hello-pangea/dnd": "^18.0.1",
+    "astro": "^5.6.1",
+    "date-fns": "^4.1.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-toastify": "^11.0.5",
+    "socket.io-client": "^4.8.1",
+    "tailwindcss": "^3.4.17"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3"
+  }
+}

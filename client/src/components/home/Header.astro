@@ -1,0 +1,28 @@
+---
+// filepath: client/src/components/home/Header.astro
+import UserMenu from "../renderers/UserMenu";
+import GlobalSearchButton from "../search/GlobalSearchButton.jsx";
+import MyGroupsMenu from "../groups/MyGroupsMenu.jsx";
+import MobileMenu from "../../styles/MobileMenu";
+---
+
+<header class="bg-gray-900 text-white p-4 shadow-lg sticky top-0 z-50">
+  <div class="container mx-auto flex justify-between items-center">
+    <!-- Logo -->
+    <a href="/" class="text-3xl font-extrabold text-purple-400 hover:text-purple-300 transition-all">
+      Gametracker
+    </a>
+
+    <!-- Botón de búsqueda, menú usuario, amigos y grupos (solo desktop) -->
+    <div class="hidden md:flex items-center gap-4">
+      <UserMenu client:load />
+      <GlobalSearchButton client:load />
+      <MyGroupsMenu client:load />
+    </div>
+
+    <!-- Menú hamburguesa (solo móvil) -->
+    <div class="md:hidden">
+      <MobileMenu client:load />
+    </div>
+  </div>
+</header>

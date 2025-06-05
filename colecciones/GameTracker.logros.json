@@ -1,0 +1,221 @@
+[{
+  "_id": {
+    "$oid": "6828a17b5e64f2c592e35664"
+  },
+  "nombre": "Bienvenido a GameTracker",
+  "descripcion": "Te has unido a la comunidad de GameTracker. ¡Empieza tu aventura!",
+  "icono": "fas fa-door-open",
+  "puntos": 5,
+  "categoria": "Interacción",
+  "criterio": {
+    "tipo": "USER_REGISTERED",
+    "valor": {
+      "registrado": true
+    },
+    "descripcionCriterio": "Regístrate en GameTracker."
+  },
+  "secreto": false
+},
+{
+  "_id": {
+    "$oid": "6828a17b5e64f2c592e35665"
+  },
+  "nombre": "Cuenta Verificada",
+  "descripcion": "Has verificado tu dirección de correo electrónico. ¡Seguridad primero!",
+  "icono": "fas fa-user-check",
+  "puntos": 10,
+  "categoria": "Interacción",
+  "criterio": {
+    "tipo": "CUENTA_VERIFICADA",
+    "valor": {
+      "verificado": true
+    },
+    "descripcionCriterio": "Verifica tu dirección de correo electrónico."
+  },
+  "secreto": false
+},
+{
+  "_id": {
+    "$oid": "6828a17b5e64f2c592e35666"
+  },
+  "nombre": "Perfil de Estrella",
+  "descripcion": "Has completado los campos principales de tu perfil. ¡Ahora todos te conocen!",
+  "icono": "fas fa-id-card",
+  "puntos": 15,
+  "categoria": "Interacción",
+  "criterio": {
+    "tipo": "PERFIL_COMPLETO",
+    "valor": {
+      "campos": [
+        "avatar",
+        "banner",
+        "biografia"
+      ]
+    },
+    "descripcionCriterio": "Añade un avatar, un banner y una biografía a tu perfil."
+  },
+  "secreto": false
+},
+{
+  "_id": {
+    "$oid": "6828a17b5e64f2c592e35667"
+  },
+  "nombre": "Primer Juego Añadido",
+  "descripcion": "Has añadido tu primer juego a una lista. ¡El inicio de una gran colección!",
+  "icono": "fas fa-plus-square",
+  "puntos": 5,
+  "categoria": "Completitud",
+  "criterio": {
+    "tipo": "JUEGOS_EN_LISTAS_TOTAL",
+    "valor": {
+      "cantidad": 1
+    },
+    "descripcionCriterio": "Añade al menos 1 juego a cualquiera de tus listas."
+  },
+  "secreto": false
+},
+{
+  "_id": {
+    "$oid": "6828a17b5e64f2c592e35668"
+  },
+  "nombre": "Coleccionista Novato",
+  "descripcion": "Has añadido 10 juegos a tus listas. ¡Tu biblioteca crece!",
+  "icono": "fas fa-book",
+  "puntos": 10,
+  "categoria": "Completitud",
+  "criterio": {
+    "tipo": "JUEGOS_EN_LISTAS_TOTAL",
+    "valor": {
+      "cantidad": 10
+    },
+    "descripcionCriterio": "Añade al menos 10 juegos a tus listas."
+  },
+  "secreto": false
+},
+{
+  "_id": {
+    "$oid": "6828a17b5e64f2c592e35669"
+  },
+  "nombre": "Primer Juego Completado",
+  "descripcion": "¡Felicidades por completar tu primer juego registrado en GameTracker!",
+  "icono": "fas fa-trophy",
+  "puntos": 20,
+  "categoria": "Completitud",
+  "criterio": {
+    "tipo": "JUEGOS_COMPLETADOS_TOTAL",
+    "valor": {
+      "cantidad": 1
+    },
+    "descripcionCriterio": "Marca al menos 1 juego como 'Completado'."
+  },
+  "secreto": false
+},
+{
+  "_id": {
+    "$oid": "6828a17b5e64f2c592e3566a"
+  },
+  "nombre": "Maratonista de Juegos",
+  "descripcion": "Has completado 5 juegos. ¡Eres un verdadero jugador!",
+  "icono": "fas fa-medal",
+  "puntos": 50,
+  "categoria": "Completitud",
+  "criterio": {
+    "tipo": "JUEGOS_COMPLETADOS_TOTAL",
+    "valor": {
+      "cantidad": 5
+    },
+    "descripcionCriterio": "Marca al menos 5 juegos como 'Completado'."
+  },
+  "secreto": false
+},
+{
+  "_id": {
+    "$oid": "6828a17b5e64f2c592e3566b"
+  },
+  "nombre": "Primer Amigo",
+  "descripcion": "Has hecho tu primer amigo en GameTracker. ¡La aventura es mejor acompañada!",
+  "icono": "fas fa-user-friends",
+  "puntos": 10,
+  "categoria": "Social",
+  "criterio": {
+    "tipo": "AMIGOS_TOTAL",
+    "valor": {
+      "cantidad": 1
+    },
+    "descripcionCriterio": "Ten al menos 1 amigo en tu lista."
+  },
+  "secreto": false
+},
+{
+  "_id": {
+    "$oid": "6828a17b5e64f2c592e3566c"
+  },
+  "nombre": "Popular",
+  "descripcion": "Tienes 10 amigos. ¡Eres el alma de la fiesta!",
+  "icono": "fas fa-users",
+  "puntos": 25,
+  "categoria": "Social",
+  "criterio": {
+    "tipo": "AMIGOS_TOTAL",
+    "valor": {
+      "cantidad": 10
+    },
+    "descripcionCriterio": "Ten al menos 10 amigos en tu lista."
+  },
+  "secreto": false
+},
+{
+  "_id": {
+    "$oid": "6828a17b5e64f2c592e3566d"
+  },
+  "nombre": "Fundador de Gremios",
+  "descripcion": "Has creado tu primer grupo. ¡Lidera a tus compañeros hacia la victoria!",
+  "icono": "fas fa-shield-alt",
+  "puntos": 15,
+  "categoria": "Social",
+  "criterio": {
+    "tipo": "GRUPO_CREADO_TOTAL",
+    "valor": {
+      "cantidad": 1
+    },
+    "descripcionCriterio": "Crea tu primer grupo."
+  },
+  "secreto": false
+},
+{
+  "_id": {
+    "$oid": "6828a17b5e64f2c592e3566e"
+  },
+  "nombre": "Miembro Activo",
+  "descripcion": "Te has unido a tu primer grupo. ¡Colabora y comparte!",
+  "icono": "fas fa-users-cog",
+  "puntos": 10,
+  "categoria": "Social",
+  "criterio": {
+    "tipo": "GRUPOS_UNIDOS_TOTAL",
+    "valor": {
+      "cantidad": 1
+    },
+    "descripcionCriterio": "Únete al menos a 1 grupo."
+  },
+  "secreto": false
+},
+{
+  "_id": {
+    "$oid": "6828a3148888b010b6421e7d"
+  },
+  "nombre": "Maestro de la Acción",
+  "descripcion": "Has completado 3 juegos del género Acción. ¡Pura adrenalina!",
+  "icono": "fas fa-bomb",
+  "puntos": 25,
+  "categoria": "Completitud",
+  "criterio": {
+    "tipo": "JUEGOS_COMPLETADOS_GENERO",
+    "valor": {
+      "generoSlug": "action",
+      "cantidad": 3
+    },
+    "descripcionCriterio": "Completa 3 juegos del género Acción."
+  },
+  "secreto": false
+}]

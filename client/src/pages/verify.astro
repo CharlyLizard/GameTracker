@@ -1,0 +1,13 @@
+---
+import Layout from "../layouts/Layout.astro";
+import VerifyResult from "../components/Cauth/VerifyResult.jsx";
+
+// Obtener el token de la URL
+const token = Astro.url.searchParams.get('token');
+---
+
+<Layout>
+  <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800">
+    <VerifyResult client:load />
+  </div>
+</Layout>

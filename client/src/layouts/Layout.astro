@@ -1,0 +1,35 @@
+---
+---
+<!doctype html>
+<html lang="en" class="flex flex-col min-h-screen">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>Gametracker</title>
+        <link rel="stylesheet" href="/src/styles/global.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    </head>
+    <body class="bg-gray-900 text-white">
+        <slot />
+    </body>
+</html>
+<style is:global>
+    /* ... tus estilos globales ... */
+    /* Estilos personalizados para react-toastify si los necesitas */
+    .Toastify__toast--success {
+        background: linear-gradient(to right, #6d28d9, #db2777) !important; /* Gradiente púrpura-rosa */
+        color: white !important;
+        border-radius: 0.75rem !important; /* 12px */
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+    }
+    .Toastify__toast-icon svg {
+        fill: #fcd34d !important; /* Amarillo para el icono por defecto */
+    }
+    .Toastify__progress-bar--success {
+        background: #fcd34d !important; /* Amarillo para la barra de progreso */
+    }
+</style>

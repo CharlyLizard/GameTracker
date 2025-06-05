@@ -1,0 +1,104 @@
+---
+// filepath: client/src/pages/about.astro
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <section class="min-h-screen bg-gradient-to-br from-purple-900 via-black to-gray-900 flex flex-col items-center justify-center py-16 relative overflow-hidden">
+    <!-- Efectos de fondo animados -->
+    <div class="absolute top-0 left-0 w-96 h-96 bg-purple-700 opacity-30 rounded-full blur-3xl animate-pulse -z-10"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-pink-600 opacity-20 rounded-full blur-3xl animate-pulse -z-10"></div>
+    <div class="absolute top-1/2 left-1/2 w-72 h-72 bg-purple-400 opacity-10 rounded-full blur-2xl animate-pulse -z-10"></div>
+
+    <div class="relative bg-gradient-to-br from-gray-900 to-gray-800 p-6 sm:p-10 rounded-3xl shadow-2xl border border-purple-500 max-w-2xl w-full mx-4 sm:mx-8 md:mx-16 text-center animate-fade-in-down">
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-purple-300 mb-4 drop-shadow-lg animate-fade-in">Acerca de <span class="text-pink-400">Gametracker</span></h1>
+      <p class="text-lg text-gray-300 mb-8 animate-fade-in delay-200">
+        Gametracker es la plataforma definitiva para gamers que quieren llevar el control de sus juegos, logros y retos, descubrir nuevos títulos y compartir su pasión con la comunidad.
+      </p>
+      <div class="flex flex-col gap-8 mt-8">
+        <!-- Cloud -->
+        <div class="bg-gray-800 rounded-xl p-6 shadow-lg border border-purple-700/30 flex flex-col md:flex-row items-center gap-4 animate-card-fade-in" style="animation-delay: 0.2s;">
+          <img src="images/cloud-strife.webp" alt="Cloud Strife" class="w-20 h-20 rounded-full border-4 border-purple-400 object-cover bg-white animate-bounce-slow" />
+          <div class="text-left">
+            <p class="text-purple-200 font-bold">Cloud Strife</p>
+            <p class="italic text-gray-300">"¡Por fin puedo llevar la cuenta de mis victorias y retos! Gametracker es más épico que la Buster Sword."</p>
+          </div>
+        </div>
+        <!-- Link -->
+        <div class="bg-gray-800 rounded-xl p-6 shadow-lg border border-purple-700/30 flex flex-col md:flex-row items-center gap-4 animate-card-fade-in" style="animation-delay: 0.4s;">
+          <img src="images/link-zelda.webp" alt="Link" class="w-20 h-20 rounded-full border-4 border-green-400 object-cover bg-white animate-bounce-slow" />
+          <div class="text-left">
+            <p class="text-green-300 font-bold">Link</p>
+            <p class="italic text-gray-300">"¡Hyaaa! Ahora mis logros no se pierden en el tiempo. ¡Gracias, Gametracker!"</p>
+          </div>
+        </div>
+        <!-- Mario -->
+        <div class="bg-gray-800 rounded-xl p-6 shadow-lg border border-purple-700/30 flex flex-col md:flex-row items-center gap-4 animate-card-fade-in" style="animation-delay: 0.6s;">
+          <img src="images/mario-bros.webp" alt="Mario" class="w-20 h-20 rounded-full border-4 border-red-400 object-cover bg-white animate-bounce-slow" />
+          <div class="text-left">
+            <p class="text-red-300 font-bold">Mario</p>
+            <p class="italic text-gray-300">"¡Mamma mia! ¡Con Gametracker, cada logro es como conseguir una nueva estrella!"</p>
+          </div>
+        </div>
+        <!-- Sonic -->
+        <div class="bg-gray-800 rounded-xl p-6 shadow-lg border border-purple-700/30 flex flex-col md:flex-row items-center gap-4 animate-card-fade-in" style="animation-delay: 0.8s;">
+          <img src="images/sonic.webp" alt="Sonic" class="w-20 h-20 rounded-full border-4 border-blue-400 object-cover bg-white animate-bounce-slow" />
+          <div class="text-left">
+            <p class="text-blue-300 font-bold">Sonic</p>
+            <p class="italic text-gray-300">"¡Es tan rápido y fácil de usar como yo! ¡No hay plataforma mejor para los gamers!"</p>
+          </div>
+        </div>
+        <!-- Dante -->
+        <div class="bg-gray-800 rounded-xl p-6 shadow-lg border border-purple-700/30 flex flex-col md:flex-row items-center gap-4 animate-card-fade-in" style="animation-delay: 1s;">
+          <img src="images/dante-dmc.webp" alt="Dante" class="w-20 h-20 rounded-full border-4 border-gray-400 object-cover bg-white animate-bounce-slow" />
+          <div class="text-left">
+            <p class="text-gray-200 font-bold">Dante</p>
+            <p class="italic text-gray-300">"¡Hasta los demonios necesitan un buen tracker! Gametracker es un auténtico infierno de bueno."</p>
+          </div>
+        </div>
+        <!-- Bayonetta -->
+        <div class="bg-gray-800 rounded-xl p-6 shadow-lg border border-purple-700/30 flex flex-col md:flex-row items-center gap-4 animate-card-fade-in" style="animation-delay: 1.2s;">
+          <img src="images/bayonetta.webp" alt="Bayonetta" class="w-20 h-20 rounded-full border-4 border-pink-400 object-cover bg-white animate-bounce-slow" />
+          <div class="text-left">
+            <p class="text-pink-300 font-bold">Bayonetta</p>
+            <p class="italic text-gray-300">"Querido, con Gametracker hasta mis combos lucen mejor. ¡No pierdas ni un logro!"</p>
+          </div>
+        </div>
+      </div>
+      <div class="mt-12 text-gray-400 text-sm animate-fade-in delay-500">
+        <p>
+          Proyecto desarrollado por <span class="text-purple-300 font-bold">Carlos Martín Salvatierra</span> para el TFG.<br/>
+          Inspirado por la pasión por los videojuegos y la comunidad gamer.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fade-in-down {
+      from { opacity: 0; transform: translateY(-40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes card-fade-in {
+      from { opacity: 0; transform: scale(0.95) translateY(40px);}
+      to { opacity: 1; transform: scale(1) translateY(0);}
+    }
+    @keyframes bounce-slow {
+      0%, 100% { transform: translateY(0);}
+      50% { transform: translateY(-12px);}
+    }
+    .animate-fade-in { animation: fade-in 1s cubic-bezier(.4,0,.2,1) both;}
+    .animate-fade-in-down { animation: fade-in-down 1s cubic-bezier(.4,0,.2,1) both;}
+    .animate-card-fade-in { animation: card-fade-in 1s cubic-bezier(.4,0,.2,1) both;}
+    .animate-bounce-slow { animation: bounce-slow 2.5s infinite;}
+    .delay-200 { animation-delay: .2s;}
+    .delay-500 { animation-delay: .5s;}
+    @media (max-width: 640px) {
+      .max-w-2xl { margin-left: 0.5rem; margin-right: 0.5rem; }
+    }
+  </style>
+</Layout>

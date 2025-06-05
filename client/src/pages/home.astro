@@ -1,0 +1,17 @@
+---
+// filepath: client/src/pages/home.astro
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/home/NavBar.astro";
+import Header from "../components/home/Header.astro";
+import MainContent from "../components/home/MainContent.astro";
+import Footer from "../components/home/Footer.astro";
+import NotificationWrapper from "../components/notifications/NotificationWrapper";
+---
+
+<Layout>
+  <Header />
+  { /** <Navbar /> */} <!-- Mantener comentado ya que el Header tiene la navegación principal -->
+  <MainContent />
+  <Footer />
+  <NotificationWrapper client:load />
+</Layout>

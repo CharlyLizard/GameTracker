@@ -1,0 +1,111 @@
+---
+import Layout from "../layouts/Layout.astro";
+import UserProfile from "../components/renderers/UserProfile.jsx"; // Asegúrate que la ruta es correcta
+import AccountSecurity from "../components/Security/AccountSecurity.jsx"; // Asumo .jsx, ajusta si es necesario
+// Importa otros componentes que necesites para la columna derecha si los tienes separados
+---
+
+<Layout>
+  <section class="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 py-12">
+    <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8"> {/* Aumentado max-w y añadido padding */}
+      
+      <div class="flex flex-col lg:flex-row lg:gap-8">
+
+        {/* Columna Izquierda: Perfil del Usuario */}
+        {/* Añadido z-10 para asegurar que esta columna sticky esté sobre otros elementos no sticky */}
+        <div class="lg:w-2/5 xl:w-1/3 w-full mb-8 lg:mb-0 lg:sticky lg:top-[3rem] lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto rounded-xl scrollbar-thin scrollbar-thumb-purple-500 scrollbar-track-gray-800/50 p-1 z-10">
+          {/* 
+            Notas de los cambios:
+            - lg:sticky lg:top-[3rem]: Hace la columna fija en pantallas grandes, alineada con el padding superior de la sección.
+            - lg:max-h-[calc(100vh-6rem)]: Limita la altura máxima para evitar el scroll de la página principal. 6rem considera 3rem de padding superior e inferior.
+            - lg:overflow-y-auto: Permite el scroll dentro de esta columna si el contenido es más largo.
+            - scrollbar-*: Clases para un scrollbar estilizado (requiere tailwindcss-scrollbar o CSS personalizado).
+            - p-1: Pequeño padding para que el scrollbar no se pegue al borde del rounded-xl.
+            - z-10: Añadido para asegurar que esta columna sticky y su contenido (incluyendo el modal) se muestren por encima de otros elementos de la página.
+          */}
+          <UserProfile client:load />
+        </div>
+
+        {/* Columna Derecha: Configuraciones y Secciones Adicionales */}
+        <div class="lg:w-3/5 xl:w-2/3 w-full space-y-6"> {/* Ajusta el ancho y el espacio */}
+          
+        
+
+          {/* Seguridad y 2FA */}
+          <AccountSecurity client:load /> {/* Este componente ya tiene su propio card/estilo */}
+
+          {/* Notificaciones */}
+          <div class="bg-gray-800/70 backdrop-blur-md shadow-xl rounded-xl p-6 border border-purple-600/30">
+            <h2 class="text-xl font-bold text-purple-200 mb-4">Notificaciones</h2>
+            <ul class="text-gray-400 text-sm space-y-3">
+              <li>
+                <label class="flex items-center gap-3 cursor-pointer select-none bg-gray-700/50 hover:bg-gray-700/80 transition-colors px-3 py-2 rounded-lg">
+                  <input type="checkbox" checked class="w-4 h-4 accent-pink-500 rounded border-gray-500 focus:ring-2 focus:ring-pink-400" />
+                  <span class="font-medium text-gray-300">Recibir notificaciones por correo</span>
+                </label>
+              </li>
+              <li>
+                <label class="flex items-center gap-3 cursor-pointer select-none bg-gray-700/50 hover:bg-gray-700/80 transition-colors px-3 py-2 rounded-lg">
+                  <input type="checkbox" checked class="w-4 h-4 accent-pink-500 rounded border-gray-500 focus:ring-2 focus:ring-pink-400" />
+                  <span class="font-medium text-gray-300">Notificaciones de logros y retos</span>
+                </label>
+              </li>
+              <li>
+                <label class="flex items-center gap-3 cursor-pointer select-none bg-gray-700/50 hover:bg-gray-700/80 transition-colors px-3 py-2 rounded-lg">
+                  <input type="checkbox" class="w-4 h-4 accent-pink-500 rounded border-gray-500 focus:ring-2 focus:ring-pink-400" />
+                  <span class="font-medium text-gray-300">Novedades y actualizaciones de la plataforma</span>
+                </label>
+              </li>
+            </ul>
+          </div>
+
+          {/* Sistema de logros */}
+          <div class="bg-gradient-to-br from-purple-800/80 via-purple-900/70 to-gray-900/70 backdrop-blur-md shadow-2xl rounded-xl p-6 border-2 border-purple-500/60 relative overflow-hidden">
+            <div class="absolute -top-8 -right-8 w-32 h-32 bg-pink-500 opacity-10 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-yellow-400 opacity-10 rounded-full blur-2xl pointer-events-none"></div>
+            <h2 class="text-2xl font-extrabold text-yellow-300 mb-5 flex items-center gap-2 drop-shadow">
+              <svg class="w-7 h-7 text-yellow-300 animate-pulse" fill="currentColor" viewBox="0 0 24 24"> {/* Cambiado a animate-pulse */}
+                <path d="M12 2l2.09 6.26L20 9.27l-5 3.64L16.18 21 12 17.27 7.82 21 9 12.91l-5-3.64 5.91-.91z"/>
+              </svg>
+              Logros y Medallas
+            </h2>
+            <ul class="text-gray-200 text-sm space-y-4"> {/* Reducido tamaño de texto base */}
+              <li class="flex items-center gap-3 bg-gray-900/70 hover:bg-gray-900/90 transition-colors rounded-lg px-4 py-3 shadow-md border-l-4 border-yellow-400">
+                <span class="text-xl">🏆</span>
+                <div>
+                  <span class="font-semibold text-yellow-200">Logros desbloqueados:</span> {/* Aquí podrías mostrar un contador si lo tienes */}
+                  <a href="/me/achievements" class="ml-2 text-xs text-yellow-300 underline hover:text-pink-300 font-medium transition">Ver todos</a>
+                </div>
+              </li>
+              <li class="flex items-center gap-3 bg-gray-900/70 hover:bg-gray-900/90 transition-colors rounded-lg px-4 py-3 shadow-md border-l-4 border-pink-400">
+                <span class="text-xl">🎖️</span>
+                <div>
+                  <span class="font-semibold text-pink-200">Medallas especiales:</span> 3
+                  <button class="ml-2 text-xs text-pink-300 underline hover:text-yellow-300 font-medium transition">Ver detalles</button>
+                </div>
+              </li>
+              <li class="flex items-center gap-3 bg-gray-900/70 hover:bg-gray-900/90 transition-colors rounded-lg px-4 py-3 shadow-md border-l-4 border-purple-400">
+                <span class="text-xl">🌍</span>
+                <div>
+                  <span class="font-semibold text-purple-200">Ranking global:</span>
+                  <span class="ml-2 text-md font-bold text-yellow-300 drop-shadow">#154</span> {/* Ajustado tamaño */}
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          {/* Otras opciones */}
+          <div class="bg-gray-800/70 backdrop-blur-md shadow-xl rounded-xl p-6 border border-purple-600/30 mt-6">
+            <h2 class="text-xl font-bold text-purple-200 mb-4">Más Opciones</h2>
+            <div class="flex flex-col sm:flex-row sm:justify-around items-center gap-4 text-sm">
+              <a href="/privacy" class="text-purple-300 hover:text-pink-400 hover:underline font-medium transition-colors">Política de Privacidad</a>
+              <a href="/about" class="text-purple-300 hover:text-pink-400 hover:underline font-medium transition-colors">Acerca de Nosotros</a>
+              <a href="/delete-account" class="text-red-400 hover:text-red-300 hover:underline font-semibold transition-colors">Eliminar cuenta</a>
+            </div>
+          </div>
+
+        </div> {/* Fin Columna Derecha */}
+      </div> {/* Fin Contenedor Flex Principal */}
+    </div> {/* Fin Container mx-auto */}
+  </section>
+</Layout>

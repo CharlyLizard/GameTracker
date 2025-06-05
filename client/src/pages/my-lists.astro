@@ -1,0 +1,13 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/home/Header.astro";
+import UserListsDisplay from "../components/lists/UserListsDisplay.jsx";
+---
+
+<Layout title="Mis Listas de Juegos - GameTracker">
+  <div class="fixed inset-0 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-800 -z-10"></div>
+  <Header />
+  <main class="container mx-auto px-4 py-8 pt-24 text-white">
+    <UserListsDisplay client:load />
+  </main>
+</Layout>

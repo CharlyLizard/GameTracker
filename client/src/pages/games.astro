@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/home/Header.astro'; // Asumo que tienes un Header
+import GameExplorer from '../components/games/GameExplorer.jsx'; // Crearemos este componente React
+---
+
+<Layout title="Explorar Juegos - GameTracker">
+  <Header />
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-extrabold text-purple-300 mb-8 text-center">
+      Explora el Universo de Juegos
+    </h1>
+    <GameExplorer client:load />
+  </main>
+</Layout>

@@ -1,0 +1,179 @@
+---
+// filepath: client/src/components/home/MainContent.astro
+import GlobalSearchButton from "../search/GlobalSearchButton";
+import RouletteTrigger from '../roulette/RouletteTrigger.jsx';
+import GameDiscoveryTrigger from '../discovery/GameDiscoveryTrigger.jsx';
+---
+
+<section class="py-16 md:py-24 bg-gray-900 text-white overflow-hidden">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl sm:text-5xl font-extrabold text-center mb-12 md:mb-16 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-orange-400 animate-fade-in-down">
+      Características Principales
+    </h2>
+    <div class="grid md:grid-cols-3 gap-8 md:gap-10">
+      {/* Tarjeta Seguimiento */}
+      <div class="group bg-gray-800/70 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-xl border-2 border-transparent hover:border-pink-500/70 transition-all duration-300 transform hover:-translate-y-1.5 hover:shadow-[0_0_25px_rgba(236,72,153,0.5)] flex flex-col animate-fade-in-up" style="animation-delay: 0.1s;">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-4 text-pink-400 group-hover:text-pink-300 transition-colors duration-300 self-start" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+        </svg>
+        <h3 class="text-2xl font-bold text-purple-300 group-hover:text-pink-300 transition-colors duration-300 mb-3">Seguimiento de Juegos</h3>
+        <p class="text-gray-400 text-sm mb-6 flex-grow">Lleva un registro detallado de los juegos que has jugado, estás jugando o planeas completar.</p>
+        <a
+          href="/my-lists"
+          class="mt-auto w-full bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-semibold py-2.5 px-6 rounded-lg shadow-lg hover:shadow-pink-500/50 transition-all duration-300 transform hover:scale-105">
+          Ir a Mis Listas
+        </a>
+      </div>
+      {/* Tarjeta Medallas */}
+      <div class="group bg-gray-800/70 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-xl border-2 border-transparent hover:border-yellow-500/70 transition-all duration-300 transform hover:-translate-y-1.5 hover:shadow-[0_0_25px_rgba(250,204,21,0.5)] flex flex-col animate-fade-in-up" style="animation-delay: 0.2s;">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-4 text-yellow-400 group-hover:text-yellow-300 transition-colors duration-300 self-start" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        <h3 class="text-2xl font-bold text-purple-300 group-hover:text-yellow-300 transition-colors duration-300 mb-3">Medallas y Logros</h3>
+        <p class="text-gray-400 text-sm mb-6 flex-grow">Gana medallas, desbloquea logros y comparte tu progreso con la comunidad de Gametracker.</p>
+        <a
+          href="/me/achievements"
+          class="mt-auto w-full bg-gradient-to-r from-yellow-500 to-orange-600 hover:from-yellow-400 hover:to-orange-500 text-white font-semibold py-2.5 px-6 rounded-lg shadow-lg hover:shadow-yellow-500/50 transition-all duration-300 transform hover:scale-105">
+          Ver Logros
+        </a>
+      </div>
+      {/* Tarjeta Descubre */}
+      <div class="group bg-gray-800/70 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-xl border-2 border-transparent hover:border-teal-500/70 transition-all duration-300 transform hover:-translate-y-1.5 hover:shadow-[0_0_25px_rgba(20,184,166,0.5)] flex flex-col animate-fade-in-up" style="animation-delay: 0.3s;">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-4 text-teal-400 group-hover:text-teal-300 transition-colors duration-300 self-start" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v3m0 9v3m4.5-7.5h3m-15h3" />
+        </svg>
+        <h3 class="text-2xl font-bold text-purple-300 group-hover:text-teal-300 transition-colors duration-300 mb-3">Descubre Nuevos Juegos</h3>
+        <p class="text-gray-400 text-sm mb-6 flex-grow">Explora un vasto catálogo y recibe recomendaciones personalizadas basadas en tus gustos.</p>
+        <GameDiscoveryTrigger client:load />
+      </div>
+    </div>
+
+    {/* Sección Combinada: Ruleta y Zona de Juegos */}
+    <section class="mt-20 md:mt-28 flex flex-col lg:flex-row gap-8 md:gap-10 lg:items-stretch">
+      {/* Columna Izquierda: Ruleta de Juegos */}
+      <div class="lg:w-2/3 w-full flex flex-col animate-fade-in-up h-[450px]" style="animation-delay: 0.4s;">
+        <RouletteTrigger client:load />
+      </div>
+
+      {/* Columna Derecha: Zona de Juegos (Rediseñada) */}
+      <div class="lg:w-1/3 w-full flex flex-col animate-fade-in-up" style="animation-delay: 0.5s;">
+        <div class="flex-grow p-6 md:p-8 bg-gray-900 rounded-2xl shadow-2xl border-2 border-purple-600/50 relative overflow-hidden text-center flex flex-col justify-center items-center neon-glow-container hover:border-purple-500/80 transition-all duration-300">
+          {/* Efecto de grid sutil de fondo */}
+          <div class="absolute inset-0 opacity-[0.03] scanlines-bg pointer-events-none"></div>
+          {/* Brillo decorativo */}
+          <div class="absolute -top-1/4 -right-1/4 w-1/2 h-1/2 bg-purple-500 rounded-full opacity-20 blur-3xl animate-pulse-slow-decorative pointer-events-none"></div>
+          <div class="absolute -bottom-1/4 -left-1/4 w-1/2 h-1/2 bg-pink-500 rounded-full opacity-20 blur-3xl animate-pulse-slower-decorative pointer-events-none"></div>
+
+          <div class="relative z-10 flex flex-col items-center justify-center h-full">
+            {/* Icono Grande Estilizado (Joystick) */}
+            <svg class="w-16 h-16 sm:w-20 sm:h-20 text-purple-400 mx-auto mb-4 animate-icon-float" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16.5 11.5c0-1.38-1.12-2.5-2.5-2.5s-2.5 1.12-2.5 2.5S12.62 14 14 14s2.5-1.12 2.5-2.5z"/>
+              <path d="M14 9V6.5c0-1.38-1.12-2.5-2.5-2.5S9 5.12 9 6.5V9"/>
+              <path d="M9 15v3.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V15"/>
+              <path d="M17.5 18H10c-1.1 0-2-.9-2-2V8c0-1.1.9-2 2-2h7.5c1.1 0 2 .9 2 2v8c0 1.1-.9 2-2 2z"/>
+              <circle cx="6" cy="12" r="1"/>
+            </svg>
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-orange-300 mb-3 drop-shadow-md">
+              Zona de Juegos
+            </h3>
+            <p class="text-gray-400 text-sm sm:text-base mb-2 px-2">
+              ¡Desafíos arcade y clásicos te esperan!
+            </p>
+            <span class="text-xs text-purple-500 font-semibold tracking-wider uppercase mb-6"> {/* Añadido mb-6 para separar del botón */}
+              Próximamente
+            </span>
+            {/* Botón para entrar a la Zona Arcade */}
+            <a
+              href="/arcade" 
+              class="w-full max-w-xs bg-gradient-to-r from-purple-600 to-indigo-700 hover:from-purple-500 hover:to-indigo-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-indigo-500/50 transition-all duration-300 transform hover:scale-105 text-center"
+            >
+              Entrar al Arcade
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Sección Cómo Añadir Videojuegos (existente) */}
+    <div class="mt-20 md:mt-28 p-8 md:p-10 bg-gradient-to-b from-gray-900/80 to-gray-800/90 backdrop-blur-md rounded-2xl shadow-xl border border-purple-600/40 flex flex-col lg:flex-row items-center gap-8 lg:gap-12 w-full animate-fade-in-up" style="animation-delay: 0.6s;">
+      <div class="text-center lg:text-left lg:w-1/2">
+        <h3 class="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-5">
+          ¿Cómo añadir videojuegos a tu perfil?
+        </h3>
+        <p class="text-gray-300 leading-relaxed mb-8 text-base sm:text-lg">
+          Es muy sencillo. Busca el juego que deseas en nuestra extensa base de datos, selecciónalo y añádelo a tus listas personales. ¡Empieza a construir tu biblioteca y a registrar tu progreso hoy mismo!
+        </p>
+        <a
+          href="/games"
+          class="inline-block bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white font-bold py-3 px-8 rounded-lg shadow-xl hover:shadow-pink-500/60 transition-all duration-300 transform hover:scale-105 text-lg">
+          Buscar Juegos Ahora
+        </a>
+      </div>
+
+      <div class="w-full lg:w-1/2 mt-6 lg:mt-0">
+        <div class="aspect-video rounded-xl shadow-2xl overflow-hidden border-2 border-pink-500/50 hover:border-pink-400/80 transition-all duration-300 transform hover:scale-103">
+          <iframe
+            class="w-full h-full"
+            src="https://www.youtube.com/embed/ZTdKm3tZ1RY?autoplay=1&mute=1&loop=1&playlist=ZTdKm3tZ1RY&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
+            title="Cómo añadir videojuegos a tu perfil"
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  @keyframes fade-in-down {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in-down { animation: fade-in-down 0.6s ease-out forwards; }
+  .animate-fade-in-up { animation: fade-in-up 0.6s ease-out forwards; }
+
+  .neon-glow-container {
+    box-shadow: 0 0 3px rgba(168, 85, 247, 0.4), 0 0 6px rgba(168, 85, 247, 0.3), 0 0 10px rgba(168, 85, 247, 0.2);
+  }
+  .neon-glow-container:hover {
+    box-shadow: 0 0 5px rgba(192, 132, 252, 0.6), 0 0 10px rgba(192, 132, 252, 0.4), 0 0 15px rgba(192, 132, 252, 0.3), 0 0 25px rgba(192, 132, 252, 0.2);
+  }
+
+  .scanlines-bg {
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 1) 2px,
+      rgba(255, 255, 255, 1) 3px
+    );
+  }
+  
+  @keyframes pulse-slow-decorative {
+    0%, 100% { opacity: 0.1; transform: scale(0.95); }
+    50% { opacity: 0.25; transform: scale(1.05); }
+  }
+  .animate-pulse-slow-decorative {
+    animation: pulse-slow-decorative 8s infinite ease-in-out;
+  }
+  .animate-pulse-slower-decorative {
+    animation: pulse-slow-decorative 10s infinite ease-in-out reverse;
+  }
+
+  @keyframes icon-float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+  }
+  .animate-icon-float {
+    animation: icon-float 3s infinite ease-in-out;
+  }
+</style>

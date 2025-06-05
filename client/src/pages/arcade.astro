@@ -1,0 +1,188 @@
+---
+// filepath: client/src/pages/arcade.astro
+import Layout from "../layouts/Layout.astro";
+import ArcadeConsole from "../components/arcade/ArcadeConsole.jsx";
+import ArcadeGameModal from "../components/arcade/ArcadeGameModal.jsx";
+
+const gameMenuItems = [
+  { name: "Higher / Lower", href: "/arcade/higher-lower", description: "Adivina si la estadística es mayor o menor." },
+  { name: "Memory Match", href: "/arcade/memory-match", description: "Encuentra las parejas de portadas." },
+  { name: "Guess the Game", href: "/arcade/guess-the-game", description: "Adivina el juego por su portada o pista." },
+  { name: "Timeline Sort", href: "/arcade/timeline-sort", description: "Ordena los juegos por fecha de lanzamiento." },
+];
+---
+
+<Layout title="Arcade Zone - GameTracker">
+  <main class="min-h-screen bg-gray-800 flex flex-col items-center justify-center p-4 arcade-font relative overflow-hidden">
+    <!-- Efecto de fondo sutil -->
+    <div class="absolute inset-0 bg-gradient-to-br from-purple-900 via-gray-900 to-indigo-900 opacity-50 -z-10"></div>
+    <div class="absolute top-10 left-10 w-72 h-72 bg-purple-600 rounded-full opacity-10 blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-10 right-10 w-72 h-72 bg-pink-600 rounded-full opacity-10 blur-3xl animate-pulse delay-2000"></div>
+
+    {/* Aquí cargamos el componente de la consola React */}
+    <ArcadeConsole client:load />
+    <ArcadeGameModal client:only="react" />
+
+    <a href="/home" class="arcade-font text-sm text-purple-300 hover:text-pink-400 mt-10 border-b-2 border-purple-500/0 hover:border-pink-400/70 pb-1 transition-all">
+      &lt; Volver al Inicio
+    </a>
+  </main>
+</Layout>
+
+<style is:global>
+  .arcade-font {
+    font-family: 'Press Start 2P', cursive;
+  }
+
+  /* --- ESTILOS GAME BOY CLASSIC --- */
+  .gb-shell {
+    background: linear-gradient(145deg, #d1d1d1, #adadad);
+    border-radius: 10px 10px 60px 10px;
+    padding: 20px;
+    box-shadow: 
+      inset 0 0 0 5px rgba(0,0,0,0.06),
+      5px 5px 15px rgba(0,0,0,0.3),
+      -2px -2px 5px rgba(255,255,255,0.7) inset,
+      0px 1px 2px rgba(0,0,0,0.15);
+    width: 300px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .gb-top-bar { text-align: center; margin-bottom: 10px; color: #4a4a4a; font-size: 0.55rem; letter-spacing: 0.8px; font-weight: bold; }
+  .gb-screen-area { background-color: #708090; border-radius: 8px 8px 40px 8px; padding: 10px; box-shadow: inset 2px 2px 5px rgba(0,0,0,0.4); margin-bottom: 20px; }
+  .gb-screen-border { background-color: #202020; padding: 5px; border-radius: 4px; }
+  .gb-screen {
+    background-color: #9bbc0f; color: #0f380f; padding: 10px; height: 180px;
+    background-image: repeating-linear-gradient(0deg, rgba(0,0,0,0.08), rgba(0,0,0,0.08) 1px, transparent 1px, transparent 2px);
+    scrollbar-width: none; -ms-overflow-style: none;
+    overflow-y: auto;
+  }
+  .gb-screen::-webkit-scrollbar { display: none; }
+  .gb-power-led { width: 7px; height: 7px; background-color: #e60000; border-radius: 50%; position: absolute; top: 12px; left: -22px; border: 1px solid rgba(0,0,0,0.4); box-shadow: 0 0 4px #ff0000, inset 0 0 1px white; }
+  .gb-screen h1 { color: #0f380f; margin-bottom: 12px; }
+  .gb-shell .menu-item-container.selected > a { background-color: rgba(15, 56, 15, 0.3); color: #000000; border-color: #0f380f; }
+  .gb-shell .menu-item-container.selected > a::before { content: ">"; position: absolute; left: 2px; color: #0f380f; }
+  .gb-shell .menu-item-container a { position: relative; padding-left: 18px !important; }
+  .gb-shell .menu-item-container a:hover, .gb-shell .menu-item-container a:focus { background-color: rgba(15, 56, 15, 0.2); color: #000; }
+  .gb-shell .menu-item-container a:focus { outline: none; }
+  .gb-brand { text-align: center; margin-bottom: 20px; color: #5a2a5a; font-size: 1.1rem; font-weight: bold; letter-spacing: -0.5px; }
+  .gb-brand span { font-family: 'Arial Black', Gadget, sans-serif; font-style: italic; color: #400040; }
+  .gb-controls-area { display: flex; justify-content: space-between; align-items: center; padding: 0 15px; margin-bottom: 25px; }
+  
+  .gb-dpad { 
+    width: 75px; 
+    height: 75px; 
+    position: relative; 
+  }
+  .gb-dpad .dpad-center { 
+    width: 25px; 
+    height: 25px; 
+    background: #282828;
+    border-radius: 50%; 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    box-shadow: 
+      inset 1px 1px 2px rgba(0,0,0,0.6),
+      0 0 1px rgba(255,255,255,0.2);
+    border: 1px solid #1a1a1a;
+  }
+  .gb-dpad .dpad-arm { 
+    position: absolute; 
+    background: #383838;
+    border: 1px solid #202020; 
+    box-shadow: 
+      0px 2px 2px rgba(0,0,0,0.3),
+      inset 0px 1px 0px rgba(255,255,255,0.1),
+      inset 0px -1px 0px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .gb-dpad .dpad-up { 
+    width: 23px; height: 30px;
+    top: 0px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    border-radius: 8px 8px 3px 3px;
+  }
+  .gb-dpad .dpad-down { 
+    width: 23px; height: 30px; 
+    bottom: 0px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    border-radius: 3px 3px 8px 8px;
+  }
+  .gb-dpad .dpad-left { 
+    width: 30px; height: 23px;
+    left: 0px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    border-radius: 8px 3px 3px 8px;
+  }
+  .gb-dpad .dpad-right { 
+    width: 30px; height: 23px; 
+    right: 0px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    border-radius: 3px 8px 8px 3px;
+  }
+  .gb-dpad .dpad-arm::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    opacity: 0.3;
+  }
+  .gb-dpad .dpad-up::after { border-width: 0 5px 5px 5px; border-color: transparent transparent #111 transparent; margin-top: -3px; }
+  .gb-dpad .dpad-down::after { border-width: 5px 5px 0 5px; border-color: #111 transparent transparent transparent; margin-bottom: -3px; }
+  .gb-dpad .dpad-left::after { border-width: 5px 5px 5px 0; border-color: transparent #111 transparent transparent; margin-left: -3px; }
+  .gb-dpad .dpad-right::after { border-width: 5px 0 5px 5px; border-color: transparent transparent transparent #111; margin-right: -3px; }
+
+  .gb-action-buttons { display: flex; gap: 20px; align-items: center; }
+  .gb-button { width: 45px; height: 45px; border-radius: 50%; background: #a00030; color: white; display: flex; justify-content: center; align-items: center; font-size: 1.1rem; font-weight: bold; border: 2px solid #700020; box-shadow: 1px 1px 3px rgba(0,0,0,0.3), inset 0 0 2px rgba(255,255,255,0.3); transform: rotate(-25deg); }
+  .gb-button.gb-button-b { margin-top: 10px; margin-left: -10px; }
+  .gb-start-select-area { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
+  .gb-button-small { background: #505050; color: #e0e0e0; border: none; padding: 5px 12px; border-radius: 10px; font-size: 0.6rem; font-weight: bold; letter-spacing: 0.5px; box-shadow: 1px 1px 2px rgba(0,0,0,0.2); transform: rotate(-25deg); }
+  
+  .gb-speaker { 
+    display: grid;
+    grid-template-columns: repeat(6, 3px);
+    grid-template-rows: repeat(6, 3px);
+    gap: 2px;
+    position: absolute; 
+    bottom: 20px; 
+    right: 25px; 
+    transform: rotate(-25deg); 
+  }
+  .gb-speaker .speaker-line {
+    width: 3px; 
+    height: 3px; 
+    background-color: rgba(0,0,0,0.35);
+    border-radius: 50%;
+    box-shadow: inset 0.5px 0.5px 1px rgba(0,0,0,0.3);
+  }
+  
+  /* Ajustes responsivos generales para Game Boy */
+  @media (max-width: 480px) {
+    .gb-shell { width: 90vw; height: auto; aspect-ratio: 3/5; padding: 15px; }
+    .gb-screen { height: 35%; }
+  }
+  @media (max-width: 400px) {
+    .gb-shell { width: 90vw; height: auto; aspect-ratio: 3/5; padding: 10px; }
+    .gb-screen { height: 30%; } /* Ajustado para que no sea demasiado grande en pantallas muy pequeñas */
+    .gb-dpad { width: 65px; height: 65px; }
+    .gb-dpad .dpad-center { width: 22px; height: 22px; }
+    .gb-dpad .dpad-up, .gb-dpad .dpad-down { width: 20px; height: 26px; }
+    .gb-dpad .dpad-left, .gb-dpad .dpad-right { width: 26px; height: 20px; }
+    .gb-action-buttons { gap: 18px; }
+    .gb-button { width: 42px; height: 42px; font-size: 1rem; }
+    .gb-button-small { padding: 4px 10px; font-size: 0.5rem; }
+    .gb-speaker { grid-template-columns: repeat(5, 2.5px); grid-template-rows: repeat(5, 2.5px); gap: 1.5px; }
+    .gb-speaker .speaker-line { width: 2.5px; height: 2.5px; }
+  }
+</style>

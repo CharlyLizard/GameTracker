@@ -1,0 +1,24 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/home/Header.astro";
+import BuzonEntrada from "../components/notifications/BuzonEntrada.jsx";
+---
+
+<style>
+  .buzon-fullscreen-bg {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #18181b 0%, #2e1065 100%);
+    z-index: 0;
+  }
+</style>
+
+<Layout title="Buzón de Entrada - GameTracker">
+  <div class="buzon-fullscreen-bg"></div>
+  <Header />
+  <section class="fixed inset-0 flex flex-col pt-20"> {/* pt-20 para dejar espacio al header sticky */}
+    <main class="flex-1 flex overflow-hidden">
+      <BuzonEntrada client:load />
+    </main>
+  </section>
+</Layout>

@@ -1,0 +1,21 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AchievementsDisplay from '../../components/achievements/AchievementsDisplay.jsx';
+// Ya no necesitamos getAuthData aquí porque la verificación se hará en el cliente dentro de AchievementsDisplay
+
+// No es necesario verificar el usuario aquí, el componente React lo hará.
+// Si quisieras una protección más robusta a nivel de servidor (sin depender de IndexedDB),
+// podrías verificar la cookie del token y, si existe, decodificarla para obtener el ID de usuario,
+// pero esto no te diría si el usuario tiene datos en IndexedDB, solo si el token es válido.
+// Por ahora, dejaremos que el componente React maneje la redirección basada en IndexedDB.
+---
+
+<Layout title="Mis Logros - GameTracker">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold text-purple-300 mb-8 text-center">
+      <i class="fas fa-trophy mr-3 text-yellow-400"></i>Mis Logros
+    </h1>
+    {/* AchievementsDisplay se encargará de verificar la autenticación y redirigir si es necesario */}
+    <AchievementsDisplay client:load />
+  </div>
+</Layout>

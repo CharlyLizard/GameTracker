@@ -1,0 +1,18 @@
+---
+// filepath: client/src/pages/delete-account.astro
+import Layout from "../layouts/Layout.astro";
+import DeleteAccountForm from "../components/Cauth/DeleteAccountForm.jsx";
+---
+
+<Layout>
+  <section class="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 py-12 flex items-center">
+    <div class="mx-auto max-w-lg bg-gray-900 rounded-2xl shadow-2xl p-8 border border-red-500/40">
+      <h1 class="text-3xl font-extrabold text-red-400 mb-6">Eliminar cuenta</h1>
+      <p class="text-gray-300 mb-6">
+        ¿Estás seguro de que quieres eliminar tu cuenta? Esta acción es <span class="text-red-400 font-bold">irreversible</span> y se borrarán todos tus datos, logros y progreso.
+      </p>
+      <DeleteAccountForm client:load />
+      <p class="text-gray-500 text-xs mt-4">Si tienes dudas, contacta con soporte antes de continuar.</p>
+    </div>
+  </section>
+</Layout>

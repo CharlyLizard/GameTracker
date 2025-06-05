@@ -1,0 +1,19 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ActiveSessions from "../components/Cauth/ActiveSessions.jsx";
+---
+
+<Layout>
+  <section class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800">
+    <div class="bg-gray-800 rounded-2xl shadow-2xl p-8 max-w-2xl w-full border border-purple-700/30">
+      <h1 class="text-3xl font-extrabold text-purple-300 mb-4 text-center">Gestión de sesiones activas</h1>
+      <p class="text-gray-400 mb-6 text-center">
+        Aquí puedes ver todas las sesiones abiertas en tu cuenta, con detalles de dispositivo, IP y fecha. Puedes cerrar sesiones individuales o todas a la vez.
+      </p>
+      <ActiveSessions client:load />
+      <div class="mt-6 text-center">
+        <a href="/settings" class="text-purple-400 hover:underline">Volver a configuración</a>
+      </div>
+    </div>
+  </section>
+</Layout>

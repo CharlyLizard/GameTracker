@@ -1,0 +1,10 @@
+---
+import Layout from "../layouts/Layout.astro";
+import GroupList from "../components/groups/GroupList.jsx";
+---
+
+<Layout>
+  <section class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800">
+    <GroupList client:load />
+  </section>
+</Layout>
