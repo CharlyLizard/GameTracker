@@ -1,4 +1,4 @@
-# 📚 Documentación de GameTracker: El Grimorio del Desarrollador 🧙‍♂️
+#📚 Documentación de GameTracker: El Grimorio del Desarrollador🧙‍♂️
 
 **Versión del Documento:** 1.0
 **Última Actualización:** (Fecha de hoy)
