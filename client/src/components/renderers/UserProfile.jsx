@@ -10,7 +10,7 @@ const UserProfile = () => {
   const [loading, setLoading] = useState(true);
   const [showEditModal, setShowEditModal] = useState(false);
 
-  const SERVER_URL = import.meta.env.PUBLIC_SERVER_URL || 'http://localhost:5000';
+  const SERVER_URL = import.meta.env.PUBLIC_SOCKET_URL || 'http://localhost:5000';
 
   useEffect(() => {
     const loadData = async () => {

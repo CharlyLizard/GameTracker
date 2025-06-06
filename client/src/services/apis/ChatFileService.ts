@@ -1,6 +1,6 @@
 import { getAuthData } from "../storage/IndexedDbService";
 
-const API_URL = "http://localhost:5000/api/chat/upload";
+const API_URL = import.meta.env.PUBLIC_API_URL + "/chat/upload";
 
 export async function uploadChatFile(file: File) {
   const token = await getAuthData("token");
@@ -20,5 +20,5 @@ export async function uploadChatFile(file: File) {
 export function getFullChatFileUrl(url: string) {
   if (!url) return "";
   if (url.startsWith("http")) return url;
-  return `http://localhost:5000${url}`;
+  return `${import.meta.env.PUBLIC_SOCKET_URL}${url}`;
 }

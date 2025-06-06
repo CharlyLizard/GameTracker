@@ -12,7 +12,7 @@ const ALLOWED_BANNER_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 
 const PLATFORM_OPTIONS = ["PC", "PlayStation 5", "Xbox Series X/S", "Nintendo Switch", "Móvil"];
 
-const SERVER_URL = 'http://localhost:5000'; // URL base del servidor
+const SERVER_URL = import.meta.env.PUBLIC_SOCKET_URL || 'http://localhost:5000'; // URL base del servidor
 
 const EditProfileModal = ({ onClose, onProfileUpdated }) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -211,9 +211,7 @@ const EditProfileModal = ({ onClose, onProfileUpdated }) => {
               
               {biografia && (
                 <div className="mt-3 w-full">
-                  <p className="text-sm text-gray-300 text-center max-h-24 overflow-y-auto p-2 scrollbar-thin scrollbar-thumb-purple-500 scrollbar-track-gray-700/50 rounded bg-gray-700/30">
-                    {biografia}
-                  </p>
+                  <p className="text-sm text-gray-300 text-center max-h-24 overflow-y-auto p-2 scrollbar-thin scrollbar-thumb-purple-500 scrollbar-track-gray-600" placeholder="Cuéntanos algo sobre ti..."></p>
                 </div>
               )}
               

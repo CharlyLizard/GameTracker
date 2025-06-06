@@ -11,21 +11,21 @@ const ResetPassword = () => {
   const [token, setToken] = useState("");
 
   // filepath: client/src/components/Cauth/ResetPassword.jsx
-    useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
-        const t = params.get("token");
-        setToken(t);
-    
-        if (t) {
-        fetch(`http://localhost:5000/api/auth/2fa/check-2fa?token=${t}`)
-            .then((res) => res.json())
-            .then((data) => {
-            console.log("Respuesta check-2fa:", data); 
-            setRequire2FA(!!data.twoFAEnabled);
-            })
-            .catch(() => setRequire2FA(false));
-        }
-    }, []);
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const t = params.get("token");
+    setToken(t);
+
+    if (t) {
+      fetch(`${import.meta.env.PUBLIC_API_URL}/auth/2fa/check-2fa?token=${t}`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("Respuesta check-2fa:", data); 
+          setRequire2FA(!!data.twoFAEnabled);
+        })
+        .catch(() => setRequire2FA(false));
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

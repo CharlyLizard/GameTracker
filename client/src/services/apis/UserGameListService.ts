@@ -1,6 +1,6 @@
 import { getAuthData } from '../storage/IndexedDbService';
 
-const API_BASE_URL = "http://localhost:5000/api/me/gamelists";
+const API_BASE_URL = import.meta.env.PUBLIC_API_URL + "/me/gamelists";
 
 async function request(endpoint: string, method: string, body?: any) {
   const token = await getAuthData("token");
@@ -29,7 +29,7 @@ export const createList = async (listData: { listName: string; description?: str
   const token = await getAuthData("token"); // Obtener token
   if (!token) throw new Error("Usuario no autenticado");
 
-  const response = await fetch(`http://localhost:5000/api/me/gamelists`, {
+  const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/me/gamelists`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

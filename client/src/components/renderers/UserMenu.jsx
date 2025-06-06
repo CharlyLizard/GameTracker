@@ -38,7 +38,7 @@ const UserMenu = () => {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
 
-  const SERVER_URL = 'http://localhost:5000'; // Asegúrate que esta sea la URL de tu backend
+  const SERVER_URL = import.meta.env.PUBLIC_SOCKET_URL || 'http://localhost:5000';
 
   useEffect(() => {
     const loadUser = async () => {

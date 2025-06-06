@@ -5,7 +5,7 @@ function validarEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-const API_URL = "http://localhost:5000/api/auth";
+const API_URL = import.meta.env.PUBLIC_API_URL + "/auth";
 
 const AuthService = {
   async registrarUsuario(data: RegistroPayload): Promise<any> {

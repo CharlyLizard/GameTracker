@@ -1,6 +1,6 @@
 import { getAuthData } from "../storage/IndexedDbService";
 
-const API_URL = "http://localhost:5000/api/friends";
+const API_URL = import.meta.env.PUBLIC_API_URL + "/friends";
 
 export async function enviarSolicitudAmistad(userId: string) {
   const token = await getAuthData("token");
@@ -31,12 +31,12 @@ export async function getSolicitudesPendientes() {
 export function getProfileImageUrl(url?: string) {
   if (!url) return "/default-avatar.png";
   if (url.startsWith("http")) return url;
-  return `http://localhost:5000${url}`;
+  return `${import.meta.env.PUBLIC_SOCKET_URL}${url}`;
 }
 
 export async function aceptarSolicitudAmistad(id: string) {
   const token = await getAuthData("token");
-  const res = await fetch(`http://localhost:5000/api/friends/accept/${id}`, {
+  const res = await fetch(`${API_URL}/accept/${id}`, {
     method: "POST",
     headers: { Authorization: `Bearer ${token}` }
   });
@@ -46,7 +46,7 @@ export async function aceptarSolicitudAmistad(id: string) {
 
 export async function rechazarSolicitudAmistad(id: string) {
   const token = await getAuthData("token");
-  const res = await fetch(`http://localhost:5000/api/friends/reject/${id}`, {
+  const res = await fetch(`${API_URL}/reject/${id}`, {
     method: "POST",
     headers: { Authorization: `Bearer ${token}` }
   });
@@ -56,7 +56,7 @@ export async function rechazarSolicitudAmistad(id: string) {
 
 export async function getAmigos() {
   const token = await getAuthData("token");
-  const res = await fetch("http://localhost:5000/api/friends/list", {
+  const res = await fetch(`${API_URL}/list`, {
     headers: { Authorization: `Bearer ${token}` }
   });
   if (!res.ok) throw new Error("Error al obtener amigos");

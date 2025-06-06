@@ -5,7 +5,7 @@ import { getAuthData } from "../../services/storage/IndexedDbService";
 
 async function crearGrupo(nombre, descripcion) {
   const token = await getAuthData("token");
-  const res = await fetch("http://localhost:5000/api/grupos", {
+  const res = await fetch(`${import.meta.env.PUBLIC_API_URL}/grupos`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -1,7 +1,7 @@
 import { io, Socket } from "socket.io-client";
 import { getAuthData } from "../storage/IndexedDbService";
 
-const SOCKET_URL = "http://localhost:5000";
+const SOCKET_URL = import.meta.env.PUBLIC_SOCKET_URL || "http://localhost:5000";
 let socket: Socket | null = null;
 
 // Conectar al socket con autenticación JWT
@@ -57,8 +57,6 @@ export function sendMessage(roomId: string, to: string, message: string, file?: 
   if (!socket) throw new Error("Socket no conectado");
   socket.emit("sendMessage", { roomId, to, message, file });
 }
-
-// ...existing code...
 
 export function joinGroupRoom(grupoId: string) {
   if (!socket) throw new Error("Socket no conectado");

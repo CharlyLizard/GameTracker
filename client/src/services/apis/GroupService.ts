@@ -1,9 +1,11 @@
 import { getAuthData } from "../storage/IndexedDbService";
 
+const API_URL = import.meta.env.PUBLIC_API_URL + "/grupos";
+
 // REST: Listar grupos
 export async function listarGrupos() {
   const token = await getAuthData("token");
-  const res = await fetch("http://localhost:5000/api/grupos", {
+  const res = await fetch(API_URL, {
     headers: { Authorization: `Bearer ${token}` },
   });
   if (!res.ok) throw new Error("Error al listar grupos");
@@ -13,7 +15,7 @@ export async function listarGrupos() {
 // REST: Unirse a grupo
 export async function unirseGrupo(grupoId: string) {
   const token = await getAuthData("token");
-  const res = await fetch(`http://localhost:5000/api/grupos/${grupoId}/unirse`, {
+  const res = await fetch(`${API_URL}/${grupoId}/unirse`, {
     method: "POST",
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -24,7 +26,7 @@ export async function unirseGrupo(grupoId: string) {
 // REST: Obtener mensajes del grupo
 export async function getMensajesGrupo(grupoId: string) {
   const token = await getAuthData("token");
-  const res = await fetch(`http://localhost:5000/api/grupos/${grupoId}/mensajes`, {
+  const res = await fetch(`${API_URL}/${grupoId}/mensajes`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   if (!res.ok) throw new Error("Error al obtener mensajes del grupo");
@@ -33,7 +35,7 @@ export async function getMensajesGrupo(grupoId: string) {
 
 export async function listarMisGrupos() {
   const token = await getAuthData("token");
-  const res = await fetch("http://localhost:5000/api/grupos/mis", {
+  const res = await fetch(`${API_URL}/mis`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   if (!res.ok) throw new Error("Error al listar tus grupos");
@@ -41,7 +43,7 @@ export async function listarMisGrupos() {
 }
 export async function salirGrupo(grupoId: string) {
   const token = await getAuthData("token");
-  const res = await fetch(`http://localhost:5000/api/grupos/${grupoId}/salir`, {
+  const res = await fetch(`${API_URL}/${grupoId}/salir`, {
     method: "POST",
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -51,7 +53,7 @@ export async function salirGrupo(grupoId: string) {
 
 export async function actualizarRolMiembro(grupoId: string, miembroUserId: string, nuevoRol: 'admin' | 'miembro') {
   const token = await getAuthData("token");
-  const res = await fetch(`http://localhost:5000/api/grupos/${grupoId}/miembros/${miembroUserId}/rol`, {
+  const res = await fetch(`${API_URL}/${grupoId}/miembros/${miembroUserId}/rol`, {
     method: "PATCH", // Usamos PATCH para actualizaciones parciales
     headers: {
       "Content-Type": "application/json",
@@ -68,7 +70,7 @@ export async function actualizarRolMiembro(grupoId: string, miembroUserId: strin
 
 export async function expulsarMiembro(grupoId: string, miembroUserId: string) {
   const token = await getAuthData("token");
-  const res = await fetch(`http://localhost:5000/api/grupos/${grupoId}/miembros/${miembroUserId}`, {
+  const res = await fetch(`${API_URL}/${grupoId}/miembros/${miembroUserId}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -81,7 +83,7 @@ export async function expulsarMiembro(grupoId: string, miembroUserId: string) {
 
 export async function actualizarDetallesGrupo(grupoId: string, detalles: { nombre: string; descripcion?: string }) {
   const token = await getAuthData("token");
-  const res = await fetch(`http://localhost:5000/api/grupos/${grupoId}/detalles`, {
+  const res = await fetch(`${API_URL}/${grupoId}/detalles`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -98,7 +100,7 @@ export async function actualizarDetallesGrupo(grupoId: string, detalles: { nombr
 
 export async function eliminarGrupo(grupoId: string) {
   const token = await getAuthData("token");
-  const res = await fetch(`http://localhost:5000/api/grupos/${grupoId}`, {
+  const res = await fetch(`${API_URL}/${grupoId}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`,

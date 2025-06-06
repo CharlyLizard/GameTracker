@@ -1,6 +1,6 @@
 import { getAuthData } from "../storage/IndexedDbService";
 
-const API_URL = "http://localhost:5000/api/searchs";
+const API_URL = import.meta.env.PUBLIC_API_URL + "/searchs";
 
 export async function buscarUsuarios(query: string): Promise<any[]> {
   const token = await getAuthData("token");

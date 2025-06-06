@@ -11,7 +11,7 @@ import type {
   RawgStore
 } from '../../models/types/rawgApi'; // Ajusta la ruta si es necesario
 
-const API_BASE_URL = "http://localhost:5000/api/rawg"; // URL de tu backend
+const API_BASE_URL = import.meta.env.PUBLIC_API_URL + "/rawg";
 
 // --- Funciones de Servicio ---
 

@@ -56,7 +56,7 @@ const MobileMenu = () => {
   }, [open]);
 
   // Determinar la URL del avatar si hay usuario
-  const SERVER_URL = 'http://localhost:5000';
+  const SERVER_URL = import.meta.env.PUBLIC_SOCKET_URL || 'http://localhost:5000';
   const avatarSrc = user && user.profileImageUrl
     ? (user.profileImageUrl.startsWith('/') ? `${SERVER_URL}${user.profileImageUrl}` : user.profileImageUrl)
     : user ? `https://api.dicebear.com/7.x/thumbs/svg?seed=${encodeURIComponent(user.nombre || "user")}` : null;
