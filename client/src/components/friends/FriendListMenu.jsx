@@ -79,20 +79,6 @@ const MainComponent = () => {
       {/* Aquí va el resto de tu componente principal */}
 
       {/* Fondo oscuro al abrir el panel */}
-      {showFriends && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm">
-          <div className="relative w-full max-w-md mx-auto">
-            <FriendListMenu open={showFriends} onClose={() => setShowFriends(false)} mobile />
-            <button
-              className="absolute top-2 right-2 text-3xl text-gray-400 hover:text-pink-300"
-              onClick={() => setShowFriends(false)}
-              aria-label="Cerrar"
-            >
-              &times;
-            </button>
-          </div>
-        </div>
-      )}
       {showGroups && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm">
           <div className="relative w-full max-w-md mx-auto">
@@ -116,6 +102,38 @@ const MainComponent = () => {
       )}
       {/* Sonido de notificación */}
       <audio ref={audioRef} src={notificationSound} preload="auto" />
+
+      {showFriends && (
+        <>
+          {/* Fondo oscuro */}
+          <div
+            className="fixed inset-0 bg-black bg-opacity-40 z-[199] transition-opacity"
+            onClick={() => setShowFriends(false)}
+          />
+          {/* Panel lateral */}
+          <div
+            className={`fixed top-0 right-0 h-full w-80 max-w-full bg-gray-900 border-l border-purple-700 shadow-2xl z-[200] transition-transform duration-300 ${
+              showFriends ? "translate-x-0" : "translate-x-full"
+            }`}
+            tabIndex={-1}
+          >
+            <div className="flex items-center justify-between p-5 border-b border-purple-700">
+              <h3 className="text-xl font-bold text-purple-300">Amigos</h3>
+              <button
+                className="text-gray-400 hover:text-pink-400 text-2xl font-bold"
+                onClick={() => setShowFriends(false)}
+                aria-label="Cerrar menú"
+              >
+                &times;
+              </button>
+            </div>
+            {/* Aquí pon el contenido de tu lista de amigos */}
+            <div className="p-5 overflow-y-auto h-[calc(100%-80px)]">
+              {/* ...tu lista de amigos y solicitudes... */}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
