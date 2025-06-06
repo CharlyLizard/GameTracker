@@ -2,8 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import { listarMisGrupos, listarGrupos, unirseGrupo } from "../../services/apis/GroupService";
 import GroupChatWindow from "./GroupChatWindow";
 import { getAuthData } from "../../services/storage/IndexedDbService";
-import FriendListMenu from "../friends/FriendListMenu";
-import { TrophyIcon } from "../../icons/Icons"; // Asegúrate de tener un icono de trofeo
 
 async function crearGrupo(nombre, descripcion) {
   const token = await getAuthData("token");
@@ -30,7 +28,6 @@ const MyGroupsMenu = () => {
   const [success, setSuccess] = useState("");
   const [showUnirse, setShowUnirse] = useState(false);
   const [gruposDisponibles, setGruposDisponibles] = useState([]);
-  const [showFriends, setShowFriends] = useState(false);
   const panelRef = useRef(null);
   const [currentUserId, setCurrentUserId] = useState(null); // Necesario para comprobar si el usuario fue expulsado
 
@@ -291,36 +288,6 @@ const MyGroupsMenu = () => {
       {/* Ventana de chat flotante */}
       {grupoChat && (
         <GroupChatWindow grupo={grupoChat} onClose={() => setGrupoChat(null)} />
-      )}
-      {/* Menú de amigos (versión móvil) */}
-      {showFriends && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm">
-          <div className="relative w-full max-w-md mx-auto">
-            <FriendListMenu open={showFriends} onClose={() => setShowFriends(false)} mobile />
-            <button
-              className="absolute top-2 right-2 text-3xl text-gray-400 hover:text-pink-300"
-              onClick={() => setShowFriends(false)}
-              aria-label="Cerrar"
-            >
-              &times;
-            </button>
-          </div>
-        </div>
-      )}
-      {/* Menú de grupos (versión móvil) */}
-      {showGroups && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm">
-          <div className="relative w-full max-w-md mx-auto">
-            <MyGroupsMenu open={showGroups} onClose={() => setShowGroups(false)} mobile />
-            <button
-              className="absolute top-2 right-2 text-3xl text-gray-400 hover:text-purple-300"
-              onClick={() => setShowGroups(false)}
-              aria-label="Cerrar"
-            >
-              &times;
-            </button>
-          </div>
-        </div>
       )}
     </>
   );
