@@ -233,11 +233,33 @@ const MobileMenu = () => {
       {showSearch && (
         <GlobalSearchModal open={showSearch} onClose={() => setShowSearch(false)} />
       )}
-      {showGroups && (
-        <MyGroupsMenu open={showGroups} onClose={() => setShowGroups(false)} />
-      )}
       {showFriends && (
-        <FriendListMenu open={showFriends} onClose={() => setShowFriends(false)} />
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm">
+          <div className="relative w-full max-w-md mx-auto">
+            <FriendListMenu open={showFriends} onClose={() => setShowFriends(false)} mobile />
+            <button
+              className="absolute top-2 right-2 text-3xl text-gray-400 hover:text-pink-300"
+              onClick={() => setShowFriends(false)}
+              aria-label="Cerrar"
+            >
+              &times;
+            </button>
+          </div>
+        </div>
+      )}
+      {showGroups && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm">
+          <div className="relative w-full max-w-md mx-auto">
+            <MyGroupsMenu open={showGroups} onClose={() => setShowGroups(false)} mobile />
+            <button
+              className="absolute top-2 right-2 text-3xl text-gray-400 hover:text-purple-300"
+              onClick={() => setShowGroups(false)}
+              aria-label="Cerrar"
+            >
+              &times;
+            </button>
+          </div>
+        </div>
       )}
       
       {/* Fondo oscuro al abrir el panel */}
