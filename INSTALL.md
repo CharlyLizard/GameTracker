@@ -17,7 +17,7 @@ Asegúrate de tener instalados los siguientes programas:
 ## 2. Clonar el Repositorio
 
 ```sh
-git clone https://github.com/TFGs-2DAW/PROYECTO-TFG-ASTRO-NODE.JS 
+git clone https://github.com/CharlyLizard/GameTracker
 cd PROYECTO-TFG-ASTRO-NODE.JS 
 ```
 
