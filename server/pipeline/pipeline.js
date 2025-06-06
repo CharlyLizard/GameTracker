@@ -8,7 +8,8 @@ module.exports = (app) => {
   app.use(cors({
     origin: [
       'https://gametracker-backend-mc5h.onrender.com', // Sustituye por tu URL real de frontend cuando la tengas
-      'http://localhost:4321' // Para desarrollo local
+      'http://localhost:4321' // Para desarrollo local,
+      'https://gametracker-navy.vercel.app'
     ],
     credentials: true,
   }));
