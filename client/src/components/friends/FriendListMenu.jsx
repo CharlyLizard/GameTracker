@@ -105,12 +105,14 @@ const MainComponent = () => {
 
       {showFriends && (
         <>
-          {/* Fondo oscuro */}
+          {/* Fondo oscuro con animación */}
           <div
-            className="fixed inset-0 bg-black bg-opacity-40 z-[199] transition-opacity"
+            className={`fixed inset-0 bg-black bg-opacity-40 z-[199] transition-opacity duration-300 ${
+              showFriends ? "opacity-100" : "opacity-0 pointer-events-none"
+            }`}
             onClick={() => setShowFriends(false)}
           />
-          {/* Panel lateral */}
+          {/* Panel lateral con animación */}
           <div
             className={`fixed top-0 right-0 h-full w-80 max-w-full bg-gray-900 border-l border-purple-700 shadow-2xl z-[200] transition-transform duration-300 ${
               showFriends ? "translate-x-0" : "translate-x-full"
