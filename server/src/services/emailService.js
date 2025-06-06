@@ -1,5 +1,7 @@
 const nodemailer = require('nodemailer');
 
+const FRONTEND_URL = 'https://gametracker-navy.vercel.app'; // Usa tu dominio de Vercel
+
 async function enviarCorreoBienvenida(email, nombre, token) {
   console.log('[emailService] Creando cuenta de prueba Ethereal...');
   const testAccount = await nodemailer.createTestAccount();
@@ -16,7 +18,8 @@ async function enviarCorreoBienvenida(email, nombre, token) {
     },
   });
 
-  const verificationUrl = `http://localhost:4321/verify?token=${token}`;
+  // Para verificación:
+  const verificationUrl = `${FRONTEND_URL}/verify?token=${token}`;
   const html = `
   <div style="background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); padding: 40px 0;">
     <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 480px; margin: auto; background: #18181b; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.25);">
@@ -83,7 +86,8 @@ async function enviarCorreoRecuperacion(email, nombre, token) {
     },
   });
 
-  const resetUrl = `http://localhost:4321/reset-password?token=${token}`;
+  // Para recuperación:
+  const resetUrl = `${FRONTEND_URL}/reset-password?token=${token}`;
   const html = `
   <div style="background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); padding: 40px 0;">
     <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 480px; margin: auto; background: #18181b; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.25);">
