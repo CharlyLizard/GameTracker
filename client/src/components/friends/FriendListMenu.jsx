@@ -8,16 +8,40 @@ import {
 } from "../../services/apis/FriendsService";
 import { connectSocket, onReceiveMessage } from "../../services/apis/ChatService";
 import ChatWindow from "../chat/ChatWindow";
-import notificationSound from "../../assets/sounds/notification.mp3"; // Ajusta la ruta si es necesario
-import FriendListMenu from "./FriendListMenu"; // Asegúrate de importar correctamente tu componente
-import MyGroupsMenu from "../groups/MyGroupsMenu"; // Asegúrate de importar correctamente tu componente
+import notificationSound from "../../assets/sounds/notification.mp3";
 
-const MainComponent = () => {
+const FriendListMenu = () => {
   const [showFriends, setShowFriends] = useState(false);
-  const [showGroups, setShowGroups] = useState(false);
+  const [solicitudes, setSolicitudes] = useState([]);
+  const [amigos, setAmigos] = useState([]);
   const [chatFriend, setChatFriend] = useState(null);
   const [unreadMessages, setUnreadMessages] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const audioRef = useRef(null);
+
+  // Cargar amigos y solicitudes
+  const fetchData = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const [sols, amigosList] = await Promise.all([
+        getSolicitudesPendientes(),
+        getAmigos(),
+      ]);
+      setSolicitudes(sols || []);
+      setAmigos(amigosList || []);
+    } catch (e) {
+      setError("No se pudieron cargar tus amigos o solicitudes.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Cargar datos al abrir el panel
+  useEffect(() => {
+    if (showFriends) fetchData();
+  }, [showFriends]);
 
   // Notificaciones de mensajes
   useEffect(() => {
@@ -25,8 +49,7 @@ const MainComponent = () => {
       onReceiveMessage((msg) => {
         // Si el chat no está abierto con ese amigo
         if (!chatFriend || chatFriend._id !== msg.from) {
-          setUnreadMessages(prev => ({ ...prev, [msg.from]: true }));
-          // Sonido solo si la pestaña está visible
+          setUnreadMessages((prev) => ({ ...prev, [msg.from]: true }));
           if (document.visibilityState === "visible") {
             audioRef.current?.play();
           }
@@ -35,25 +58,47 @@ const MainComponent = () => {
     });
   }, [chatFriend]);
 
-  // Al abrir el chat con un amigo, limpia el badge
+  // Limpiar badge al abrir chat
   const handleOpenChat = (friend) => {
     setChatFriend(friend);
-    setUnreadMessages(prev => {
+    setUnreadMessages((prev) => {
       const copy = { ...prev };
       delete copy[friend._id];
       return copy;
     });
   };
 
-  // Manejo de la apertura del menú de amigos desde otros componentes
+  // Escuchar evento global para abrir el menú
   useEffect(() => {
     const handleOpenFriendsMenu = () => setShowFriends(true);
-    window.addEventListener('open-friends-menu', handleOpenFriendsMenu);
-    return () => window.removeEventListener('open-friends-menu', handleOpenFriendsMenu);
+    window.addEventListener("open-friends-menu", handleOpenFriendsMenu);
+    return () =>
+      window.removeEventListener("open-friends-menu", handleOpenFriendsMenu);
   }, []);
+
+  // Aceptar solicitud
+  const handleAceptar = async (id) => {
+    try {
+      await aceptarSolicitudAmistad(id);
+      fetchData();
+    } catch (e) {
+      setError("Error al aceptar solicitud.");
+    }
+  };
+
+  // Rechazar solicitud
+  const handleRechazar = async (id) => {
+    try {
+      await rechazarSolicitudAmistad(id);
+      fetchData();
+    } catch (e) {
+      setError("Error al rechazar solicitud.");
+    }
+  };
 
   return (
     <div>
+      {/* Botón flotante de amigos */}
       <button
         className="relative w-11 h-11 flex items-center justify-center rounded-full bg-gray-800 hover:bg-purple-700 transition-colors shadow focus:outline-none ml-2"
         title="Ver amigos"
@@ -73,36 +118,23 @@ const MainComponent = () => {
           <path d="M2 20c0-3 4-5 6-5s6 2 6 5" />
           <path d="M14 20c0-2 2-4 4-4s4 2 4 4" />
         </svg>
-        {/* Aquí podrías agregar un badge para las solicitudes pendientes */}
+        {/* Badge de solicitudes pendientes */}
+        {solicitudes.length > 0 && (
+          <span className="absolute -top-1 -right-1 bg-pink-500 text-white text-xs font-bold rounded-full px-1.5 py-0.5 shadow">
+            {solicitudes.length}
+          </span>
+        )}
       </button>
 
-      {/* Aquí va el resto de tu componente principal */}
-
-      {/* Fondo oscuro al abrir el panel */}
-      {showGroups && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm">
-          <div className="relative w-full max-w-md mx-auto">
-            <MyGroupsMenu open={showGroups} onClose={() => setShowGroups(false)} mobile />
-            <button
-              className="absolute top-2 right-2 text-3xl text-gray-400 hover:text-purple-300"
-              onClick={() => setShowGroups(false)}
-              aria-label="Cerrar"
-            >
-              &times;
-            </button>
-          </div>
-        </div>
-      )}
       {/* Ventana de chat flotante */}
       {chatFriend && (
-        <ChatWindow
-          friend={chatFriend}
-          onClose={() => setChatFriend(null)}
-        />
+        <ChatWindow friend={chatFriend} onClose={() => setChatFriend(null)} />
       )}
+
       {/* Sonido de notificación */}
       <audio ref={audioRef} src={notificationSound} preload="auto" />
 
+      {/* Panel lateral de amigos */}
       {showFriends && (
         <>
           {/* Fondo oscuro con animación */}
@@ -129,9 +161,111 @@ const MainComponent = () => {
                 &times;
               </button>
             </div>
-            {/* Aquí pon el contenido de tu lista de amigos */}
             <div className="p-5 overflow-y-auto h-[calc(100%-80px)]">
-              {/* ...tu lista de amigos y solicitudes... */}
+              {error && (
+                <div className="bg-red-700/30 text-red-200 rounded p-2 mb-3">
+                  {error}
+                </div>
+              )}
+              {loading ? (
+                <div className="text-center text-purple-400 py-4">
+                  Cargando...
+                </div>
+              ) : (
+                <>
+                  {/* Solicitudes pendientes */}
+                  {solicitudes.length > 0 && (
+                    <div className="mb-6">
+                      <h4 className="text-pink-400 font-semibold mb-2">
+                        Solicitudes pendientes
+                      </h4>
+                      <ul className="space-y-3">
+                        {solicitudes.map((sol) => (
+                          <li
+                            key={sol._id}
+                            className="flex items-center justify-between bg-gray-800 rounded-lg px-3 py-2"
+                          >
+                            <div className="flex items-center gap-2">
+                              <img
+                                src={getProfileImageUrl(sol.from.profileImageUrl)}
+                                alt={sol.from.nickname}
+                                className="w-8 h-8 rounded-full border-2 border-purple-500"
+                              />
+                              <span className="text-purple-200 font-medium">
+                                {sol.from.nickname}
+                                <span className="text-xs text-gray-400 ml-1">
+                                  #{sol.from.tag}
+                                </span>
+                              </span>
+                            </div>
+                            <div className="flex gap-1">
+                              <button
+                                className="px-2 py-1 bg-green-600 hover:bg-green-700 text-white rounded text-xs"
+                                onClick={() => handleAceptar(sol._id)}
+                                title="Aceptar"
+                              >
+                                ✓
+                              </button>
+                              <button
+                                className="px-2 py-1 bg-red-600 hover:bg-red-700 text-white rounded text-xs"
+                                onClick={() => handleRechazar(sol._id)}
+                                title="Rechazar"
+                              >
+                                ✗
+                              </button>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Lista de amigos */}
+                  <h4 className="text-purple-400 font-semibold mb-2">
+                    Tus amigos
+                  </h4>
+                  {amigos.length === 0 ? (
+                    <div className="text-gray-400 text-sm">
+                      No tienes amigos aún.
+                    </div>
+                  ) : (
+                    <ul className="space-y-3">
+                      {amigos.map((amigo) => (
+                        <li
+                          key={amigo._id}
+                          className="flex items-center justify-between bg-gray-800 rounded-lg px-3 py-2"
+                        >
+                          <div className="flex items-center gap-2">
+                            <img
+                              src={getProfileImageUrl(amigo.profileImageUrl)}
+                              alt={amigo.nickname}
+                              className="w-8 h-8 rounded-full border-2 border-purple-500"
+                            />
+                            <span className="text-purple-200 font-medium">
+                              {amigo.nickname}
+                              <span className="text-xs text-gray-400 ml-1">
+                                #{amigo.tag}
+                              </span>
+                            </span>
+                          </div>
+                          <div className="flex gap-1">
+                            <button
+                              className="px-2 py-1 bg-purple-700 hover:bg-pink-600 text-white rounded text-xs"
+                              onClick={() => handleOpenChat(amigo)}
+                              title="Chatear"
+                            >
+                              💬
+                              {unreadMessages[amigo._id] && (
+                                <span className="ml-1 w-2 h-2 bg-pink-400 rounded-full inline-block"></span>
+                              )}
+                            </button>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </>
+              )}
             </div>
           </div>
         </>
@@ -140,4 +274,4 @@ const MainComponent = () => {
   );
 };
 
-export default MainComponent;
+export default FriendListMenu;
