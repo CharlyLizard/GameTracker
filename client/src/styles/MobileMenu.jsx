@@ -10,7 +10,6 @@ const MobileMenu = () => {
   const [user, setUser] = useState(null);
   const [showSearch, setShowSearch] = useState(false);
   const [showGroups, setShowGroups] = useState(false);
-  const [showFriends, setShowFriends] = useState(false);
   const menuRef = useRef(null);
 
   // Cargar datos del usuario al iniciar
@@ -189,7 +188,10 @@ const MobileMenu = () => {
               </button>
               {/* Amigos */}
               <button
-                onClick={() => { setShowFriends(true); setOpen(false); }}
+                onClick={() => {
+                  window.dispatchEvent(new Event('open-friends-menu'));
+                  setOpen(false);
+                }}
                 className="flex flex-col items-center justify-center gap-2 p-4 bg-gray-800/60 hover:bg-pink-800/30 rounded-lg transition-colors text-center"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -235,9 +237,6 @@ const MobileMenu = () => {
       )}
       {showGroups && (
         <MyGroupsMenu open={showGroups} onClose={() => setShowGroups(false)} />
-      )}
-      {showFriends && (
-        <FriendListMenu open={showFriends} onClose={() => setShowFriends(false)} />
       )}
       
       {/* Fondo oscuro al abrir el panel */}
