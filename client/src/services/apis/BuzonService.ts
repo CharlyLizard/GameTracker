@@ -1,6 +1,6 @@
 import type { MensajeBuzon } from "../../models/orm/MensajeBuzon";
 
-const API_URL = "http://localhost:5000/api/buzon";
+const API_URL = import.meta.env.PUBLIC_API_URL + "/buzon";
 
 // Helper para obtener el token (puedes centralizarlo si usas context/auth)
 function getToken(): string | null {
