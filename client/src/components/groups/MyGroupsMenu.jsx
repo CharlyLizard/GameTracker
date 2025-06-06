@@ -2,7 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { listarMisGrupos, listarGrupos, unirseGrupo } from "../../services/apis/GroupService";
 import GroupChatWindow from "./GroupChatWindow";
 import { getAuthData } from "../../services/storage/IndexedDbService";
-import FriendListMenu from "./FriendListMenu";
+import FriendListMenu from "../friends/FriendListMenu";
+import { TrophyIcon } from "../../icons/Icons"; // Asegúrate de tener un icono de trofeo
 
 async function crearGrupo(nombre, descripcion) {
   const token = await getAuthData("token");
