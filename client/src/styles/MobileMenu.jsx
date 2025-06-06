@@ -196,6 +196,22 @@ const MobileMenu = () => {
                 </svg>
                 <span className="text-sm">Grupos</span>
               </button>
+              {/* Amigos */}
+              <button
+                onClick={() => {
+                  window.dispatchEvent(new Event('open-friends-menu'));
+                  setOpen(false);
+                }}
+                className="flex flex-col items-center justify-center gap-2 p-4 bg-gray-800/60 hover:bg-pink-800/30 rounded-lg transition-colors text-center"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <circle cx="8" cy="8" r="4" />
+                  <circle cx="16" cy="8" r="4" />
+                  <path d="M2 20c0-3 4-5 6-5s6 2 6 5" />
+                  <path d="M14 20c0-2 2-4 4-4s4 2 4 4" />
+                </svg>
+                <span className="text-sm">Amigos</span>
+              </button>
             </div>
           </div>
           
