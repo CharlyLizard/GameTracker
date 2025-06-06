@@ -187,7 +187,26 @@ const MobileMenu = () => {
                 </svg>
                 <span className="text-sm">Buscar</span>
               </button>
+              {/* Amigos */}
+              <button
+                onClick={() => { setShowFriends(true); setOpen(false); }}
+                className="flex flex-col items-center justify-center gap-2 p-4 bg-gray-800/60 hover:bg-pink-800/30 rounded-lg transition-colors text-center"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87M16 3.13a4 4 0 010 7.75M8 3.13a4 4 0 010 7.75" />
+                </svg>
+                <span className="text-sm">Amigos</span>
+              </button>
               {/* Grupos */}
+              <button
+                onClick={() => { setShowGroups(true); setOpen(false); }}
+                className="flex flex-col items-center justify-center gap-2 p-4 bg-gray-800/60 hover:bg-purple-800/30 rounded-lg transition-colors text-center"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87M16 3.13a4 4 0 010 7.75M8 3.13a4 4 0 010 7.75" />
+                </svg>
+                <span className="text-sm">Grupos</span>
+              </button>
             </div>
           </div>
           
@@ -213,6 +232,12 @@ const MobileMenu = () => {
       {/* Modales para móvil */}
       {showSearch && (
         <GlobalSearchModal open={showSearch} onClose={() => setShowSearch(false)} />
+      )}
+      {showGroups && (
+        <MyGroupsMenu open={showGroups} onClose={() => setShowGroups(false)} />
+      )}
+      {showFriends && (
+        <FriendListMenu open={showFriends} onClose={() => setShowFriends(false)} />
       )}
       
       {/* Fondo oscuro al abrir el panel */}
